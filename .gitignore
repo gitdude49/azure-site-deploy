@@ -40,4 +40,4 @@ jspm_packages
 .vscode
 
 ##
-azure-site-deploy.json
+test/dist/azure-site-deploy-touchfile.txt
