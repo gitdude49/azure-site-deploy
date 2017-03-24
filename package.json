@@ -1,0 +1,32 @@
+{
+  "name": "azure-site-deploy",
+  "version": "0.1.1",
+  "description": "Npm module to quickly perform an Azure WebSite/WebApp using GIT deployment",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "azure-site-deploy": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitdude49/azure-site-deploy.git"
+  },
+  "keywords": [
+    "Azure",
+    "WebSite/WebApp",
+    "deployment"
+  ],
+  "author": "gitdude49",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/gitdude49/azure-site-deploy/issues"
+  },
+  "homepage": "https://github.com/gitdude49/azure-site-deploy#readme",
+  "dependencies": {
+    "azure-deploy": "^0.5.4",
+    "request": "^2.79.0",
+    "yargs": "^7.0.2"
+  }
+}
