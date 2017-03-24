@@ -9,6 +9,8 @@ var COMMIT_MESSAGE = 'Azure deploy script';
 var fs = require("fs");
 var path = require("path");
 var request = require('request');
+var keytar = require('keytar');
+
 var argv = require('yargs')
     .usage('Usage: $0 -s <site name>')
     .alias('s', 'site')
@@ -27,15 +29,28 @@ if (!site) {
     return 1;
 }
 checkRequiredSiteProperty(site, 'appServiceName');
-checkRequiredSiteProperty(site, 'deploymentUsername');
-checkRequiredSiteProperty(site, 'deploymentPassword');
+checkRequiredSiteProperty(site, 'keychainServiceName');
+checkRequiredSiteProperty(site, 'keychainAccountName');
 checkRequiredSiteProperty(site, 'buildOutput');
+
+var keychainPassword = keytar.getPassword(site.keychainServiceName, site.keychainAccountName);
+if (!keychainPassword) {
+    console.log(`Error: failed to retrieve password from keychain/vault, tried using serviceName: "${site.keychainServiceName}", acountName: "${site.keychainAccountName}".`);
+    console.log('For OSX Keychain:')
+    console.log('- create an "application password" & enter:');
+    console.log('   Name: <choose a name you like>"');
+    console.log('   Kind: <choose a kind you like>"');
+    console.log('   Account: make this match the value for "keychainAccountName"');
+    console.log('   Where: make this match the value for "keychainServiceName"');
+    console.log('   Password: <your Azure Deployment password');
+    return 1;
+}
 
 fs.writeFileSync(path.join(site.buildOutput, FILENAME_AZUREDEPLOY), 'Just a file to make sure we have something to commit to GIT, timestamp: ' + (new Date()).getTime());
 
 var DeploymentManager= require('azure-deploy').AzureWebSiteDeploymentManager;
 
-var deploymentManager = new DeploymentManager(site.appServiceName, site.deploymentUsername, site.deploymentPassword);
+var deploymentManager = new DeploymentManager(site.appServiceName, site.keychainAccountName, keychainPassword);
 deploymentManager.deploy(site.buildOutput, GIT_EXCLUDES, COMMIT_MESSAGE).then(function() {
     console.log("DONE");
 

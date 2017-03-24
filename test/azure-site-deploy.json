@@ -1,0 +1,9 @@
+{
+    "usch_azure_sitedeploytest": {
+        "appServiceName": "sitedeploytest",    
+        "keychainServiceName": "Azure Deployment Credentials",
+        "keychainAccountName": "matgezien-deployment",
+        "buildOutput": "./dist",
+        "checkUrl": "http://sitedeploytest.azurewebsites.net/index.html"
+    }
+}

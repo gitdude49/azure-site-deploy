@@ -28,5 +28,8 @@
     "azure-deploy": "^0.5.4",
     "request": "^2.79.0",
     "yargs": "^7.0.2"
+  },
+  "devDependencies": {
+    "keytar": "^3.0.2"
   }
 }
