@@ -1,6 +1,6 @@
 {
   "name": "azure-site-deploy",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Npm module to quickly perform an Azure WebSite/WebApp using GIT deployment",
   "main": "",
   "scripts": {
@@ -30,6 +30,5 @@
     "keytar": "^3.0.2",
     "yargs": "^7.0.2"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
