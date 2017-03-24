@@ -19,11 +19,11 @@ Create a file **azure-site-deploy.json**. It should contain a map of your site, 
 
 The Azure App Service name we need to deploy for
 
-- deploymentUsername
-The Git deployment username*
+- keychainServiceName
+The Servicename under which your Azure Deployment password is stored in keychain/vault*
 
-- deploymentPassword
-The Git deployment password*
+- keychainAccountName
+The Accountname under which your Azure Deployment password is stored in keychain/vault, also used as Azure deployment 'Username' during deployment*
 
 - buildOutput
 
@@ -40,8 +40,8 @@ Filename: azure-site-deploy.json
 {
     "mysite": {
         "appServiceName": "mysite",
-        "deploymentUsername": "deploy",
-        "deploymentPassword": "supersecretpassword",
+        "keychainServiceName": "Azure Deployment Credentials",
+        "keychainAccountName": "MyAzureDeploymentUsername",
         "buildOutput": "./dist",
         "checkUrl": "http://mysite.azurewebsites.net/index.html"
     }
