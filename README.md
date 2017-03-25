@@ -13,7 +13,7 @@ Local install:
 
 
 ## Required configuration file
-Create a file **azure-site-deploy.json**. It should contain a map of your site, where each site has values for:
+Create a file **azure-site-deploy.json**. It should contain a map of your site(s), where each site has values for:
 
 - appServiceName
 
@@ -48,12 +48,27 @@ Filename: azure-site-deploy.json
 }
 ~~~~
 
+
+## Keychain / Vault
+For Keychain/Vault interaction [Keytar](https://www.npmjs.com/package/keytar) is being used.
+
+To allow azure-site-deply password work with OSX keychain create an "application password" & enter:
+
+- Name: &lt;choose a name you like&gt;
+- Kind: &lt;choose a kind you like&gt;
+- Account: make this match the value for "keychainAccountName"
+- Where: make this match the value for "keychainServiceName"
+- Password: &lt;your Azure Deployment password&gt;
+
+Also make sure to provide the "node" process access to Keychain password entry.
+
+
 ## Run
 When azure-site-deploy has been installed globally:
 - Perform the project specific build for your project, this should produce output in **buildOutput**
-- Run **azure-site-deploy**
+- Run **azure-site-deploy**, use commandline option -s (or --site) and provide the site you want to deploy
 ```
-azure-site-deploy mysite
+azure-site-deploy --site mysite
 ```
 
 When azure-sit-deploy has been installed locally:
@@ -63,7 +78,7 @@ Add **azure-site-deploy** to one of the scripts in your **package.json**
 {
   ... other content in package.json not shown here
   "scripts": {
-    "deploy": "dotnet publish && azure-site-deploy mysite"
+    "deploy": "dotnet publish && azure-site-deploy --site mysite"
   }
 }
 ```
